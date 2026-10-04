@@ -1,0 +1,46 @@
+from collections import deque
+
+BUCKETS = 10
+DIGITS = 2
+
+
+def radix_sort(A):
+
+    queues = []
+
+    # 0 ~ 9까지 10개의 버킷 생성
+    for i in range(BUCKETS):
+        queues.append(deque())
+
+    n = len(A)
+
+    # 처음에는 1의 자리부터
+    factor = 1
+
+    for d in range(DIGITS):
+
+        # 각 숫자를 해당 자릿수의 버킷에 삽입
+        for i in range(n):
+            bucket = (A[i] // factor) % BUCKETS
+            queues[bucket].append(A[i])
+
+        i = 0
+
+        # 0번 버킷부터 순서대로 꺼내기
+        for b in range(BUCKETS):
+
+            while queues[b]:
+                A[i] = queues[b].popleft()
+                i += 1
+
+        # 다음 자릿수로 이동
+        factor *= BUCKETS
+
+        print("step", d + 1, A)
+
+
+A = [69, 10, 30, 2, 16, 8, 31, 22]
+
+radix_sort(A)
+
+print("Sorted:", A)

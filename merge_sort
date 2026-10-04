@@ -1,0 +1,44 @@
+def merge_sort(A, p ,r): #A[p...,r]
+    if p < r:
+        q = (p+r)//2
+        merge_sort(A, p, q)
+        merge_sort(A, q+1, r)
+        merge(A, p, q ,r)
+
+
+def merge(A,p,q,r):
+    tmp = []
+    i = p
+    j = q+1
+
+    #두 부분 배열을 병합
+    while i <= q and j <=r:
+        if A[i] <= A[j]:
+            tmp.append(A[i])
+            i = i + 1
+        else:
+            tmp.append(A[j])
+            j = j + 1
+
+    #왼쪽 부분 배열이 남는 경우
+    while i <= q:
+        tmp.append(A[i])
+        i+=1
+    #오른쪽 부분 배열이 남는 경우
+    while j <= r:
+        tmp.append(A[j])
+        j+=1
+
+    #병합 결과는 원본 배열에 복사
+    for k in range(len(tmp)):
+        A[p + k] = tmp[k]
+
+
+
+array1 = [69, 10, 30, 2, 16, 8, 31, 22]
+
+print("정렬 전:", array1)
+
+merge_sort(array1, 0, len(array1) - 1)
+
+print("정렬 후:", array1)

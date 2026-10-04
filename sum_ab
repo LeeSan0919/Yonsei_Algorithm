@@ -1,0 +1,10 @@
+def sum_ab(a,b):
+    if a==b:
+        return a
+    if a>b:
+        return 0
+    m = (a+b)//2
+
+    return sum_ab(a,m) + sum_ab(m+1,b)
+
+print(sum_ab(3,8))

@@ -1,0 +1,15 @@
+import time
+
+def Euclid(a,b): #단, a >= b >= 0
+    if b == 0:
+        return a
+
+    return Euclid(b, a % b)
+
+
+start = time.time()
+
+print (Euclid(24,14))
+
+end = time.time()
+print (f"수행시간 : {end - start}")

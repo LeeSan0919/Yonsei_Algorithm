@@ -1,0 +1,5 @@
+def calc_sum2(num):
+    sum = (num+1) * num / 2
+    return sum
+
+print(calc_sum2(100))

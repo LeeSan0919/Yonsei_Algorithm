@@ -1,0 +1,48 @@
+def adjust(A, r, n):
+
+    tmp = A[r]
+    child = 2 * r
+
+    while child <= n:
+
+        # 두 자식 중 더 큰 자식 선택
+        if child < n and A[child] < A[child + 1]:
+            child += 1
+
+        # 부모가 더 크면 Max Heap 조건 만족
+        if tmp >= A[child]:
+            break
+
+        # 큰 자식을 부모 자리로 올림
+        A[child // 2] = A[child]
+
+        # 한 단계 아래로 이동
+        child *= 2
+
+    # 원래 부모를 적절한 위치에 삽입
+    A[child // 2] = tmp
+
+
+def heap_sort(A):
+
+    # 1번 인덱스부터 데이터가 있다고 가정
+    n = len(A) - 1
+
+    # 1. Max Heap 만들기
+    for i in range(n // 2, 0, -1):
+        adjust(A, i, n)
+
+    # 2. 최댓값을 뒤로 하나씩 이동
+    for i in range(n - 1, 0, -1):
+
+        A[1], A[i + 1] = A[i + 1], A[1]
+
+        adjust(A, 1, i)
+
+
+
+A = [None, 69, 10, 30, 2, 16, 8, 31, 22]
+
+heap_sort(A)
+
+print(A[1:])
